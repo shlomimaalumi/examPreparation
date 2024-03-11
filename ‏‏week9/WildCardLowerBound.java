@@ -1,3 +1,4 @@
+package generics;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,8 +21,23 @@ public class WildCardLowerBound {
 	}
 
 }
-
+class A{}
+class B extends A{}
+class C extends B{}
 class LowerBound {
+	public static void addToList(List<? super B> list) {
+		// we can read from the list just the type of Object
+		// we can add to the list the type of B and its subtypes
+		list.add(new B());
+		list.add(new C());
+		//list.add(new A()); // compilation error
+		A a = (A) list.get(0);
+		B b = (B) list.get(0);
+		C c = (C) list.get(1);
+		Object o = list.get(0);
+
+
+	}
 	public static void addDogToList(List<? super Dog> list, Dog element){
 		list.add(element);
 	}
